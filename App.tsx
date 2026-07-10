@@ -128,13 +128,12 @@ export default function App() {
     const light = luminance(bgColor) > 0.6;
     const tc = light ? '#000' : '#fff';
     const locationName = alert.incidentLocation || alert.codeLocation || alert.locationName || '';
+    const title = [alert.label || 'ALERT', locationName ? `in ${locationName}` : ''].join(' ');
     return (
       <View style={[styles.container, { backgroundColor: bgColor }]}>
         <StatusBar hidden />
         <Animated.View style={[styles.overlay, { transform: [{ scale: pulse }] }]}>
-          <Text style={[styles.codeLabel, { color: tc }]}>{alert.label || 'ALERT'}</Text>
-          <Text style={[styles.codeName, { color: tc }]}>{alert.code || ''}</Text>
-          {locationName ? <Text style={[styles.location, { color: tc }]}>in {locationName}</Text> : null}
+          <Text style={[styles.codeLabel, { color: tc }]}>{title}</Text>
           {alert.message ? <Text style={[styles.message, { color: tc }]}>{alert.message}</Text> : null}
         </Animated.View>
       </View>
